@@ -37,20 +37,18 @@ class ModeloClientes
     }
 
     /*=============================================
-	REGISTRO DE USUARIO
+	REGISTRO DE CLIENTE
 	=============================================*/
 
-    /*  static public function mdlIngresarUsuario($tabla, $datos)
+    static public function mdlIngresarCliente($tabla, $datos)
     {
 
-        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(nombre,documento, usuario, password, perfil, foto) VALUES (:nombre, :documento, :usuario, :password, :perfil, :foto)");
+        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(nombre_cliente, email_contacto,  idpais) VALUES (:nombre_cliente, :email_contacto, :idpais)");
 
-        $stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
-        $stmt->bindParam(":documento", $datos["documento"], PDO::PARAM_STR);
-        $stmt->bindParam(":usuario", $datos["usuario"], PDO::PARAM_STR);
-        $stmt->bindParam(":password", $datos["password"], PDO::PARAM_STR);
-        $stmt->bindParam(":perfil", $datos["perfil"], PDO::PARAM_STR);
-        $stmt->bindParam(":foto", $datos["foto"], PDO::PARAM_STR);
+        $stmt->bindParam(":nombre_cliente", $datos["nombre_cliente"], PDO::PARAM_STR);
+        $stmt->bindParam(":email_contacto", $datos["email_contacto"], PDO::PARAM_STR);
+        $stmt->bindParam(":idpais", $datos["idpais"], PDO::PARAM_INT);
+
 
         if ($stmt->execute()) {
 
@@ -63,23 +61,21 @@ class ModeloClientes
         $stmt->close();
 
         $stmt = null;
-    } */
+    }
 
     /*=============================================
-	EDITAR USUARIO
+	EDITAR CLIENTE
 	=============================================*/
 
-    /* static public function mdlEditarUsuario($tabla, $datos)
+    static public function mdlEditarCliente($tabla, $datos)
     {
 
-        $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre = :nombre, documento = :documento, password = :password, perfil = :perfil, foto = :foto WHERE usuario = :usuario");
+        $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre_cliente = :nombre_cliente, email_contacto = :email_contacto, idpais = :idpais WHERE id = :id");
 
-        $stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
-        $stmt->bindParam(":documento", $datos["documento"], PDO::PARAM_STR);
-        $stmt->bindParam(":password", $datos["password"], PDO::PARAM_STR);
-        $stmt->bindParam(":perfil", $datos["perfil"], PDO::PARAM_STR);
-        $stmt->bindParam(":foto", $datos["foto"], PDO::PARAM_STR);
-        $stmt->bindParam(":usuario", $datos["usuario"], PDO::PARAM_STR);
+        $stmt->bindParam(":nombre_cliente", $datos["nombre_cliente"], PDO::PARAM_STR);
+        $stmt->bindParam(":email_contacto", $datos["email_contacto"], PDO::PARAM_STR);
+        $stmt->bindParam(":idpais", $datos["idpais"], PDO::PARAM_STR);
+        $stmt->bindParam(":id", $datos["id"], PDO::PARAM_STR);
 
         if ($stmt->execute()) {
 
@@ -92,7 +88,7 @@ class ModeloClientes
         $stmt->close();
 
         $stmt = null;
-    } */
+    }
 
     /*=============================================
 	ACTUALIZAR USUARIO
@@ -123,7 +119,7 @@ class ModeloClientes
 	BORRAR USUARIO
 	=============================================*/
 
-    /*  static public function mdlBorrarUsuario($tabla, $datos)
+    static public function mdlBorrarCliente($tabla, $datos)
     {
 
         $stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id = :id");
@@ -141,5 +137,5 @@ class ModeloClientes
         $stmt->close();
 
         $stmt = null;
-    } */
+    }
 }

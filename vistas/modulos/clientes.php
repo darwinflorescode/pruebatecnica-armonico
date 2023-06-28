@@ -24,7 +24,7 @@ if ($_SESSION["perfil"] == "Especial" || $_SESSION["perfil"] == "Vendedor") {
 
                 <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarCliente">
 
-                    Agregar usuario
+                    <span class="fa fa-plus-square"></span> Agregar cliente
 
                 </button>
 
@@ -43,7 +43,7 @@ if ($_SESSION["perfil"] == "Especial" || $_SESSION["perfil"] == "Vendedor") {
                             <th>Nombre Cliente</th>
                             <th>Email Contacto</th>
                             <th>Pais</th>
-                            <th>Acciones</th>
+                            <th width="12">Acciones</th>
 
                         </tr>
 
@@ -71,8 +71,8 @@ if ($_SESSION["perfil"] == "Especial" || $_SESSION["perfil"] == "Vendedor") {
 
                     <div class="btn-group">
                         
-                      <button class="btn btn-warning btnEditarUsuario" idCliente="' . $value["id"] . '" data-toggle="modal" data-target="#modalEditarUsuario"><i class="fa fa-pencil"></i></button>
-
+                      <button class="btn btn-warning btnEditarCliente" idCliente="' . $value["id"] . '" data-toggle="modal" data-target="#modalEditarCliente"><i class="fa fa-pencil"></i></button>
+                        <button class="btn btn-danger btnEliminarCliente" idCliente="' . $value["id"] . '" nombreCliente="' . $value["nombre_cliente"] . '"><i class="fa fa-times"></i></button>
                   
 
                     </div>  
@@ -98,7 +98,7 @@ if ($_SESSION["perfil"] == "Especial" || $_SESSION["perfil"] == "Vendedor") {
 </div>
 
 <!--=====================================
-MODAL AGREGAR USUARIO
+MODAL AGREGAR CLIENTE
 ======================================-->
 
 <div id="modalAgregarCliente" class="modal fade" role="dialog">
@@ -137,7 +137,7 @@ MODAL AGREGAR USUARIO
 
                                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
 
-                                <input type="text" class="form-control input-lg" name="nuevoNombreContacto" placeholder="Nombre Contato" required>
+                                <input type="text" class="form-control input-lg" name="nuevoNombreCliente" placeholder="Nombre cliente" required>
 
                             </div>
 
@@ -150,7 +150,7 @@ MODAL AGREGAR USUARIO
 
                                 <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
 
-                                <input type="email" class="form-control input-lg" name="nuevoEmailContacto" placeholder="Email Contato" required>
+                                <input type="email" class="form-control input-lg" name="nuevoEmailContacto" placeholder="Email contato" required>
 
                             </div>
 
@@ -158,15 +158,15 @@ MODAL AGREGAR USUARIO
 
 
 
-                        <!-- ENTRADA PARA SELECCIONAR SU PERFIL -->
+                        <!-- ENTRADA PARA SELECCIONAR EL PAIS -->
 
                         <div class="form-group">
 
                             <div class="input-group">
 
                                 <span class="input-group-addon"><i class="fa fa-list"></i></span>
-
-                                <select class="selectpicker form-control" name="nuevoPais" data-show-subtext="true" data-live-search="true">
+                                <!-- selectpicker -->
+                                <select class="form-control input-lg" name="nuevoPais" data-show-subtext="true" required data-live-search="true">
                                     <!--      <select class="form-control input-lg" name="nuevoPerfil"> -->
 
                                     <option value="">Selecionar Pais</option>
@@ -178,7 +178,7 @@ MODAL AGREGAR USUARIO
 
                                     foreach ($paises as $key => $value) {
 
-                                        echo "<option data-subtext='" . $value['iso'] . "'>" . $value['nombre'] . "</option>";
+                                        echo "<option value='" . $value['id'] . "' data-subtext='" . $value['iso'] . "'>" . $value['nombre'] . "</option>";
                                     }
                                     ?>
 
@@ -202,14 +202,14 @@ MODAL AGREGAR USUARIO
 
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
 
-                    <button type="submit" class="btn btn-primary">Guardar Cliente</button>
+                    <button type="submit" class="btn btn-primary">Guardar cliente</button>
 
                 </div>
 
                 <?php
 
-                /* $crearUsuario = new ControladorUsuarios();
-                $crearUsuario->ctrCrearUsuario(); */
+                $crearCliente = new ControladorClientes();
+                $crearCliente->ctrCrearCliente();
 
                 ?>
 
@@ -222,10 +222,10 @@ MODAL AGREGAR USUARIO
 </div>
 
 <!--=====================================
-MODAL EDITAR USUARIO
+MODAL EDITAR CLIENTE
 ======================================-->
 
-<div id="modalEditarUsuario" class="modal fade" role="dialog">
+<div id="modalEditarCliente" class="modal fade" role="dialog">
 
     <div class="modal-dialog">
 
@@ -241,7 +241,7 @@ MODAL EDITAR USUARIO
 
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
 
-                    <h4 class="modal-title">Editar usuario</h4>
+                    <h4 class="modal-title">Editar cliente</h4>
 
                 </div>
 
@@ -253,6 +253,8 @@ MODAL EDITAR USUARIO
 
                     <div class="box-body">
 
+                        <!-- input type hidden -->
+                        <input type="hidden" name="editaridCliente" id="editaridCliente" value="">
                         <!-- ENTRADA PARA EL NOMBRE -->
 
                         <div class="form-group">
@@ -261,93 +263,54 @@ MODAL EDITAR USUARIO
 
                                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
 
-                                <input type="text" class="form-control input-lg" id="editarNombre" name="editarNombre" value="" required>
+                                <input type="text" class="form-control input-lg" name="editarNombreCliente" id="editarNombreCliente" placeholder="Nombre cliente" required>
 
                             </div>
 
                         </div>
-
-                        <!-- ENTRADA PARA EL DOCUMENTO -->
+                        <!-- ENTRADA PARA EL EMAIL -->
 
                         <div class="form-group">
 
                             <div class="input-group">
 
-                                <span class="input-group-addon"><i class="fa fa-id-card"></i></span>
+                                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
 
-                                <input type="text" class="form-control input-lg" pattern="[0-9]{8}[\-]{1}[0-9]{1}" name="editarDocumento" id="editarDocumento" placeholder="Documeno (DUI)" required>
-
-                            </div>
-
-                        </div>
-
-                        <!-- ENTRADA PARA EL USUARIO -->
-
-                        <div class="form-group">
-
-                            <div class="input-group">
-
-                                <span class="input-group-addon"><i class="fa fa-key"></i></span>
-
-                                <input type="text" class="form-control input-lg" id="editarUsuario" name="editarUsuario" value="" readonly>
+                                <input type="email" class="form-control input-lg" name="editarEmailContacto" id="editarEmailContacto" placeholder="Email contato" required>
 
                             </div>
 
                         </div>
 
-                        <!-- ENTRADA PARA LA CONTRASEÑA -->
+
+
+                        <!-- ENTRADA PARA SELECCIONAR EL PAIS -->
 
                         <div class="form-group">
 
                             <div class="input-group">
 
-                                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                <span class="input-group-addon"><i class="fa fa-list"></i></span>
+                                <!-- selectpicker -->
+                                <select class="form-control input-lg" name="editarPais" id="editarPais" required data-live-search="true">
+                                    <!--      <select class="form-control input-lg" name="nuevoPerfil"> -->
 
-                                <input type="password" class="form-control input-lg" name="editarPassword" placeholder="Escriba la nueva contraseña">
+                                    <option value="">Selecionar Pais</option>
 
-                                <input type="hidden" id="passwordActual" name="passwordActual">
+                                    <?php
+                                    $item = null;
+                                    $valor = null;
+                                    $paises = ControladorPaises::ctrMostrarPaises($item, $valor);
 
-                            </div>
+                                    foreach ($paises as $key => $value) {
 
-                        </div>
-
-                        <!-- ENTRADA PARA SELECCIONAR SU PERFIL -->
-
-                        <div class="form-group">
-
-                            <div class="input-group">
-
-                                <span class="input-group-addon"><i class="fa fa-users"></i></span>
-
-                                <select class="form-control input-lg" name="editarPerfil">
-
-                                    <option value="" id="editarPerfil"></option>
-
-                                    <option value="Administrador">Administrador</option>
-
-                                    <option value="Especial">Especial</option>
-
-                                    <option value="Vendedor">Vendedor</option>
+                                        echo "<option value='" . $value['id'] . "' data-subtext='" . $value['iso'] . "'>" . $value['nombre'] . "</option>";
+                                    }
+                                    ?>
 
                                 </select>
 
                             </div>
-
-                        </div>
-
-                        <!-- ENTRADA PARA SUBIR FOTO -->
-
-                        <div class="form-group">
-
-                            <div class="panel">SUBIR FOTO</div>
-
-                            <input type="file" class="nuevaFoto" name="editarFoto">
-
-                            <p class="help-block">Peso máximo de la foto 2MB</p>
-
-                            <img src="vistas/img/usuarios/default/anonymous.png" class="img-thumbnail previsualizarEditar" width="100px">
-
-                            <input type="hidden" name="fotoActual" id="fotoActual">
 
                         </div>
 
@@ -363,14 +326,14 @@ MODAL EDITAR USUARIO
 
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
 
-                    <button type="submit" class="btn btn-primary">Modificar usuario</button>
+                    <button type="submit" class="btn btn-primary">Modificar cliente</button>
 
                 </div>
 
                 <?php
 
-                /*   $editarUsuario = new ControladorUsuarios();
-                $editarUsuario->ctrEditarUsuario(); */
+                $editarCliente = new ControladorClientes();
+                $editarCliente->ctrEditarCliente();
 
                 ?>
 
@@ -384,7 +347,7 @@ MODAL EDITAR USUARIO
 
 <?php
 
-/* $borrarUsuario = new ControladorUsuarios();
-$borrarUsuario->ctrBorrarUsuario(); */
+$borrarUsuario = new ControladorClientes();
+$borrarUsuario->ctrBorrarCliente();
 
 ?>

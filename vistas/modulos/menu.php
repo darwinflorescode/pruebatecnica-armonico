@@ -28,7 +28,7 @@
 
 				<a href="clientes">
 
-					<i class="fa fa-users"></i>
+					<i class="fa fa-user-circle-o"></i>
 					<span>Clientes</span>
 
 				</a>

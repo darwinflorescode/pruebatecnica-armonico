@@ -75,7 +75,7 @@ if ($_SESSION["perfil"] == "Especial" || $_SESSION["perfil"] == "Vendedor") {
                 echo '<td><img src="' . $value["foto"] . '" class="img-thumbnail" width="40px"></td>';
               } else {
 
-                echo '<td><img src="vistas/img/usuarios/default/anonymous.png" class="img-thumbnail" width="40px"></td>';
+                echo '<td><img src="vistas/img/usuarios/admin/191.jpg" class="img-thumbnail" width="40px"></td>';
               }
 
               echo '<td>' . $value["perfil"] . '</td>';
