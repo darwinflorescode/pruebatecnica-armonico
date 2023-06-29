@@ -16,9 +16,6 @@ $productos = ControladorProductos::ctrMostrarProductos($item, $valor, $orden);
 $totalProductos = count($productos);
  */
 ?>
-
-
-
 <div class="col-lg-12 col-xs-6">
 
   <div class="row">
@@ -47,7 +44,7 @@ $totalProductos = count($productos);
         <a href="./vistas/img/plantilla/NuevaTablaCliente.jpg" target="_blank">
           <img src="./vistas/img/plantilla/NuevaTablaCliente.jpg" alt="Nueva Tabla Clientes" style="width:100%">
           <div class="caption">
-            <p>Cree la tabla <strong>clientes</strong> que me pedía en el documento de intrucciones con el nombre de <strong>tb_clientes</strong> ya que existía una con el nombre de <strong>clientes</strong> en la Base de datos proporcionada.</p>
+            <p>Desarrollé la tabla <strong>clientes</strong> que me pedía en el documento de intrucciones con el nombre de <strong>tb_clientes</strong> ya que existía una con el nombre de <strong>clientes</strong> en la Base de datos proporcionada. Cree la tabla tb_paises para crear una relación entre la tabla cliente y paises (incorporando asi todos los paises).</p>
           </div>
         </a>
       </div>
@@ -67,18 +64,18 @@ $totalProductos = count($productos);
     </div>
     <div class="col-md-4">
       <div class="thumbnail">
-        <a href="/w3images/nature.jpg">
-          <img src="/w3images/nature.jpg" alt="Nature" style="width:100%">
+        <a href="./vistas/img/plantilla/trello.jpg" target="_blank">
+          <img src="./vistas/img/plantilla/trello.jpg" alt="Trello - Gestionar Proyecto" style="width:100%">
           <div class="caption">
-            <p>Lorem ipsum...</p>
+            <p>Gestión del tiempo de desarrollo de la Prueba Técnica</p>
           </div>
         </a>
       </div>
     </div>
     <div class="col-md-4">
       <div class="thumbnail">
-        <a href="/w3images/fjords.jpg">
-          <img src="/w3images/fjords.jpg" alt="Fjords" style="width:100%">
+        <a href="./vistas/img/plantilla/vscode.jpg" target="_blank">
+          <img src="./vistas/img/plantilla/vscode.jpg" alt="Vs Code" style="width:100%">
           <div class="caption">
             <p>Lorem ipsum...</p>
           </div>
